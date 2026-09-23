@@ -14,6 +14,8 @@ TurboBot Studio is a static, browser-based Arduino robot IDE. It combines a Scra
 
 Install with npm install, start with npm run dev, test with npm test, and build with npm run build.
 
+The production build uses relative asset URLs, so it works both at a custom domain and under a GitHub Pages repository path such as `/Arduino-Web-Coding/`.
+
 ## Uploading
 
 The editor generates a standard .ino sketch. Download it and flash it with Arduino IDE or arduino-cli. Once firmware is installed, Connect provides a live 9600-baud Web Serial terminal. Browser compilation is not claimed because a fully static Pages site does not include board-specific compiler toolchains.
