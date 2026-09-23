@@ -1,0 +1,1 @@
+{"name":"arduino-web-coding","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"vite --host 0.0.0.0","build":"vite build","test":"vitest run"},"dependencies":{"blockly":"^12.3.1"},"devDependencies":{"vite":"^7.1.7","vitest":"^3.2.4"}}
