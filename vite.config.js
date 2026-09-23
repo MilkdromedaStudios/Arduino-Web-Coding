@@ -1,8 +1,10 @@
 import {defineConfig} from 'vite';
+import {nodePolyfills} from 'vite-plugin-node-polyfills';
 
-// GitHub Pages serves project sites from /<repository>/ rather than the domain
-// root. Relative asset URLs keep the same build working at that subpath, at a
-// custom domain, and when dist/index.html is previewed from any static server.
+// Relative URLs keep GitHub Pages subpaths and custom domains working. The
+// uploader's STK500 library uses Node stream primitives, so browser shims are
+// bundled instead of requiring any locally installed software.
 export default defineConfig({
-  base: './'
+  base: './',
+  plugins: [nodePolyfills({include:['buffer','process','stream']})]
 });
