@@ -1,1 +1,21 @@
-{"name":"arduino-web-coding","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"vite --host 0.0.0.0","build":"vite build","test":"vitest run"},"dependencies":{"blockly":"^12.3.1"},"devDependencies":{"vite":"^7.1.7","vitest":"^3.2.4"}}
+{
+  "name": "arduino-web-coding",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "test": "vitest run",
+    "sync:turbowarp": "node scripts/sync-turbowarp.mjs"
+  },
+  "dependencies": {
+    "scratch-blocks": "github:TurboWarp/scratch-blocks#7c58de666658df1bb447d010132aa3914c10f41e",
+    "web-arduino-uploader": "^1.0.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.7",
+    "vite-plugin-node-polyfills": "^0.28.0",
+    "vitest": "^3.2.4"
+  }
+}

@@ -1,25 +1,40 @@
-# TurboBot Studio
+# TurboWarp Arduino
 
-TurboBot Studio is a static, browser-based Arduino robot IDE. It combines a Scratch/TurboWarp-inspired editor experience with BlocklyDuino-style Arduino code generation, without loading Scratch projects.
+A browser-based Arduino editor built from the [TurboWarp GUI](https://github.com/TurboWarp/scratch-gui) and **TurboWarp's own fork of Scratch Blocks**. The on-screen logo is branding, not an outbound link; upstream attribution lives here instead.
 
-## Features
+## What is included
 
-- Colorful drag-and-drop blocks for pins, PWM motors, timing, and serial output
-- A small Python alternative that translates common robot commands into Arduino C++
-- Live generated Arduino code and .ino downloads
-- Web Serial connection, monitor, and send controls
-- Automatic local project saving and GitHub Pages deployment
+- A reproducible `npm run sync:turbowarp` command that clones the complete TurboWarp GUI into `vendor/turbowarp-gui` at upstream commit `25c11c6f246de9c6d36b29a61c505cd35f34cb8c`
+- Real TurboWarp Scratch Blocks, pinned to upstream commit `7c58de666658df1bb447d010132aa3914c10f41e`
+- TurboWarp’s real menu bar, rounded editor tabs, editor/stage split, run controls, stage sizing controls, and target selector adapted for an Arduino device
+- Scratch control, operators, and variables alongside digital, analog, serial, servo, tone, and I²C Arduino blocks
+- Arduino C++ generation and `.ino` download
+- Direct USB serial monitor using Web Serial
+- Direct browser-to-board `.hex` flashing for Uno, Nano, old-bootloader clones, Pro Mini, and LGT8F328P-compatible modified boards
+- A custom-board mode without arbitrary pin-number limits
+- Local, offline-friendly project storage and relative paths for GitHub Pages
 
 ## Develop
 
-Install with npm install, start with npm run dev, test with npm test, and build with npm run build.
+```sh
+npm install
+npm run sync:turbowarp
+npm run dev
+npm test
+npm run build
+```
 
-The production build uses relative asset URLs, so it works both at a custom domain and under a GitHub Pages repository path such as `/Arduino-Web-Coding/`.
+The sync command preserves an exact local checkout of the upstream GUI source used as the UI reference without committing a Git submodule (gitlinks can cause “Pull request object state is invalid” errors in patch-based PR systems), while the Arduino-specific blocks, board stage, code generator, serial monitor, and uploader are maintained in this repository. The checked-in browser bundle in `public/vendor/turbowarp-scratch-blocks.js` is built directly from TurboWarp's GPL-3.0 `scratch-blocks` repository. Its required SVG runtime media is in `public/media/`. Binary click sounds and cursor files are intentionally omitted so patch-based hosts can create pull requests without rejecting binary files; CSS supplies native cursor fallbacks.
 
-## Uploading
+## Uploading without the Arduino IDE
 
-The editor generates a standard .ino sketch. Download it and flash it with Arduino IDE or arduino-cli. Once firmware is installed, Connect provides a live 9600-baud Web Serial terminal. Browser compilation is not claimed because a fully static Pages site does not include board-specific compiler toolchains.
+1. Build your project with blocks and open **Arduino C++** to download the `.ino` source.
+2. Obtain a compiled `.hex` for the sketch (from a school, maker-space, build service, or another computer).
+3. Press **Upload**, choose the `.hex`, select the matching bootloader profile, and attach the board with a USB **data** cable.
+4. Chrome or Edge transfers the firmware directly with Web Serial. Nothing is installed locally.
 
-## Credits and license
+Compiling arbitrary Arduino C++ entirely in a static page is not claimed: board cores and third-party libraries are large, board-specific toolchains. The USB flashing step itself is fully browser based. Mega and non-AVR boards can still use generated `.ino` code and serial monitoring, but require a compatible external compiler/uploader.
 
-The interaction design is inspired by [TurboWarp](https://github.com/TurboWarp/scratch-gui) and the Arduino workflow by [BlocklyDuino](https://github.com/BlocklyDuino/BlocklyDuino/tree/v2). This implementation is original and uses the maintained Blockly package. Licensed under GPL-3.0; see [LICENSE](LICENSE).
+## License and credits
+
+TurboWarp Scratch Blocks is derived from Scratch Blocks and licensed under GPL-3.0. The uploader uses `web-arduino-uploader` (MIT). This project is GPL-3.0; see [LICENSE](LICENSE).
