@@ -6,5 +6,6 @@ import {nodePolyfills} from 'vite-plugin-node-polyfills';
 // bundled instead of requiring any locally installed software.
 export default defineConfig({
   base: './',
-  plugins: [nodePolyfills({include:['buffer','process','stream']})]
+  plugins: [nodePolyfills({include:['buffer','process','stream']})],
+  test: {include: ['src/**/*.test.js']}
 });

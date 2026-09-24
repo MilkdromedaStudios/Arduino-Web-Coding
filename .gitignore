@@ -2,3 +2,7 @@ node_modules/
 dist/
 .vite/
 *.log
+
+# Fetched by `npm run sync:turbowarp`; kept out of the PR to avoid an invalid
+# GitHub pull-request object caused by a nested Git repository/gitlink.
+vendor/turbowarp-gui/
