@@ -21,11 +21,11 @@ export function registerArduinoBlocks(Blockly){
 
 const block=x=>`<block type="${x}"/>`;
 export const toolbox=`<xml style="display:none">
- <category name="Events" colour="${colours.events}" secondaryColour="${colours.events}">${block('arduino_start')}</category>
- <category name="Control" colour="${colours.control}" secondaryColour="${colours.control}">${block('control_repeat')}${block('control_forever')}${block('control_if')}${block('control_if_else')}${block('control_repeat_until')}${block('control_wait_until')}${block('control_stop')}${block('arduino_wait')}</category>
- <category name="Pins" colour="${colours.pins}" secondaryColour="${colours.pins}">${block('arduino_pin_mode')}${block('arduino_digital_write')}${block('arduino_digital_read')}${block('arduino_analog_write')}${block('arduino_analog_read')}</category>
- <category name="Operators" colour="${colours.operators}" secondaryColour="${colours.operators}">${block('operator_add')}${block('operator_subtract')}${block('operator_multiply')}${block('operator_divide')}${block('operator_mod')}${block('operator_random')}${block('operator_lt')}${block('operator_equals')}${block('operator_gt')}${block('operator_and')}${block('operator_or')}${block('operator_not')}${block('operator_mathop')}</category>
- <category name="Variables" colour="${colours.data}" secondaryColour="${colours.data}" custom="VARIABLE"></category>
- <category name="Serial" colour="${colours.serial}" secondaryColour="${colours.serial}">${block('arduino_serial_print')}${block('arduino_millis')}</category>
- <category name="Hardware" colour="${colours.hardware}" secondaryColour="${colours.hardware}">${block('arduino_servo')}${block('arduino_tone')}${block('arduino_no_tone')}${block('arduino_i2c_write')}${block('arduino_custom')}</category>
+ <category id="events" name="Events" colour="${colours.events}" secondaryColour="${colours.events}">${block('arduino_start')}</category>
+ <category id="control" name="Control" colour="${colours.control}" secondaryColour="${colours.control}">${block('control_repeat')}${block('control_forever')}${block('control_if')}${block('control_if_else')}${block('control_repeat_until')}${block('control_wait_until')}${block('control_stop')}${block('arduino_wait')}</category>
+ <category id="pins" name="Pins" colour="${colours.pins}" secondaryColour="${colours.pins}">${block('arduino_pin_mode')}${block('arduino_digital_write')}${block('arduino_digital_read')}${block('arduino_analog_write')}${block('arduino_analog_read')}</category>
+ <category id="operators" name="Operators" colour="${colours.operators}" secondaryColour="${colours.operators}">${block('operator_add')}${block('operator_subtract')}${block('operator_multiply')}${block('operator_divide')}${block('operator_mod')}${block('operator_random')}${block('operator_lt')}${block('operator_equals')}${block('operator_gt')}${block('operator_and')}${block('operator_or')}${block('operator_not')}${block('operator_mathop')}</category>
+ <category id="variables" name="Variables" colour="${colours.data}" secondaryColour="${colours.data}" custom="VARIABLE"></category>
+ <category id="serial" name="Serial" colour="${colours.serial}" secondaryColour="${colours.serial}">${block('arduino_serial_print')}${block('arduino_millis')}</category>
+ <category id="hardware" name="Hardware" colour="${colours.hardware}" secondaryColour="${colours.hardware}">${block('arduino_servo')}${block('arduino_tone')}${block('arduino_no_tone')}${block('arduino_i2c_write')}${block('arduino_custom')}</category>
 </xml>`;
