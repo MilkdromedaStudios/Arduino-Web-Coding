@@ -7,6 +7,11 @@ A browser-based Arduino editor built from the [TurboWarp GUI](https://github.com
 - A reproducible `npm run sync:turbowarp` command that clones the complete TurboWarp GUI into `vendor/turbowarp-gui` at upstream commit `25c11c6f246de9c6d36b29a61c505cd35f34cb8c`
 - Real TurboWarp Scratch Blocks, pinned to upstream commit `7c58de666658df1bb447d010132aa3914c10f41e`
 - TurboWarp’s real menu bar, rounded editor tabs, editor/stage split, run controls, stage sizing controls, and target selector adapted for an Arduino device
+A browser-based Arduino editor powered by **TurboWarp's own fork of Scratch Blocks**. It uses the same Scratch-shaped block renderer and interaction model as TurboWarp, with Arduino hardware blocks provided as an extension.
+
+## What is included
+
+- Real TurboWarp Scratch Blocks, pinned to upstream commit `7c58de666658df1bb447d010132aa3914c10f41e`
 - Scratch control, operators, and variables alongside digital, analog, serial, servo, tone, and I²C Arduino blocks
 - Arduino C++ generation and `.ino` download
 - Direct USB serial monitor using Web Serial
