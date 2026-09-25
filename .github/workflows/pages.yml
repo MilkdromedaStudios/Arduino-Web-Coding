@@ -22,9 +22,21 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
+      - name: Install root dependencies
+        run: npm ci
+      - name: Test root app
+        run: npm test
+      - name: Build root app
+        run: npm run build
+      - name: Build customized TurboWarp editor for /dev
+        run: |
+          npm install --prefix dev
+          npm --prefix dev run setup
+          CI=true NODE_ENV=production ROOT=/dev/ ROUTING_STYLE=wildcard npm --prefix dev/turbowarp-gui run build
+          rm -rf dist/dev
+          mkdir -p dist/dev
+          cp -a dev/turbowarp-gui/build/. dist/dev/
+          cp dist/dev/editor.html dist/dev/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
