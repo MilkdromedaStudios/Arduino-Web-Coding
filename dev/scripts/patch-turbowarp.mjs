@@ -10,7 +10,7 @@ if (!existsSync(GUI_ROOT)) {
 }
 
 const replaceOnce = (source, search, replacement, label) => {
-    const updated = typeof search === 'string' ? source.replace(search, replacement) : source.replace(search, replacement);
+    const updated = source.replace(search, replacement);
     if (updated === source) throw new Error(`TurboWarp patch marker not found: ${label}`);
     return updated;
 };
@@ -28,7 +28,7 @@ gui = replaceOnce(
 gui = replaceOnce(
     gui,
     "    } = omit(props, 'dispatch');\n    if (children) {",
-    `    } = omit(props, 'dispatch');\n\n    const arduinoExtensionURL = new URL(\\`${'${basePath}'}static/arduino/arduino-extension.js\\`, window.location.href).href;\n    React.useEffect(() => {\n        const manager = vm.extensionManager;\n        const security = manager.securityManager;\n        const originalGetSandboxMode = security.getSandboxMode.bind(security);\n        security.getSandboxMode = url => url === arduinoExtensionURL ? 'unsandboxed' : originalGetSandboxMode(url);\n        manager.loadExtensionURL(arduinoExtensionURL).catch(error => {\n            // eslint-disable-next-line no-console\n            console.error('Unable to load Arduino extension', error);\n        });\n        return () => {\n            security.getSandboxMode = originalGetSandboxMode;\n        };\n    }, [vm, arduinoExtensionURL]);\n\n    if (children) {`,
+    "    } = omit(props, 'dispatch');\n\n    const arduinoExtensionURL = new URL(basePath + 'static/arduino/arduino-extension.js', window.location.href).href;\n    React.useEffect(() => {\n        const manager = vm.extensionManager;\n        const security = manager.securityManager;\n        const originalGetSandboxMode = security.getSandboxMode.bind(security);\n        security.getSandboxMode = url => url === arduinoExtensionURL ? 'unsandboxed' : originalGetSandboxMode(url);\n        manager.loadExtensionURL(arduinoExtensionURL).catch(error => {\n            // eslint-disable-next-line no-console\n            console.error('Unable to load Arduino extension', error);\n        });\n        return () => {\n            security.getSandboxMode = originalGetSandboxMode;\n        };\n    }, [vm, arduinoExtensionURL]);\n\n    if (children) {",
     'automatic Arduino extension load'
 );
 
