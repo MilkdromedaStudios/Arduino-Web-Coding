@@ -1,0 +1,7 @@
+node_modules/
+turbowarp-gui/
+static/
+js/
+media/
+*.map
+.DS_Store
