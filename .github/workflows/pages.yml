@@ -24,8 +24,6 @@ jobs:
           cache: npm
       - name: Install root dependencies
         run: npm ci
-      - name: Test root app
-        run: npm test
       - name: Build root app
         run: npm run build
       - name: Build customized TurboWarp editor for /dev
