@@ -1,0 +1,16 @@
+{
+  "name": "arduino-web-test-dev",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-turbowarp.mjs",
+    "patch": "node scripts/patch-turbowarp.mjs",
+    "setup": "npm run sync && npm run patch && npm --prefix turbowarp-gui ci",
+    "start": "npm run patch && npm --prefix turbowarp-gui start",
+    "build": "npm run setup && cross-env NODE_ENV=production ROOT=/dev/ ROUTING_STYLE=wildcard npm --prefix turbowarp-gui run build && node scripts/publish-build.mjs"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
