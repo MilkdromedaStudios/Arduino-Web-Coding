@@ -4,7 +4,7 @@ import {resolve} from 'node:path';
 
 const repository='https://github.com/TurboWarp/scratch-gui.git';
 const revision='25c11c6f246de9c6d36b29a61c505cd35f34cb8c';
-const destination=resolve('vendor/turbowarp-gui');
+const destination=resolve('dev/turbowarp-gui');
 const run=(args,options={})=>execFileSync('git',args,{stdio:'inherit',...options});
 
 if(existsSync(destination)){
