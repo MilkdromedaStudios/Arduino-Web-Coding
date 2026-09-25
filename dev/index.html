@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arduino Web Test</title>
+    <style>
+        * { box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; font-family: "Helvetica Neue", Arial, sans-serif; }
+        body { display: flex; flex-direction: column; background: #f5f5f5; }
+        #hardware-bar {
+            height: 52px; flex: 0 0 52px; display: flex; align-items: center; gap: 8px;
+            padding: 7px 12px; background: #00979d; color: white; box-shadow: 0 1px 4px rgba(0,0,0,.2); z-index: 3;
+        }
+        #hardware-bar strong { margin-right: 8px; white-space: nowrap; }
+        #hardware-bar select, #hardware-bar input, #hardware-bar button {
+            height: 34px; border-radius: 6px; border: 1px solid rgba(0,0,0,.18); padding: 0 10px; font: inherit;
+        }
+        #hardware-bar button { cursor: pointer; background: white; color: #333; font-weight: 600; }
+        #hardware-bar button.primary { background: #4c97ff; color: white; border-color: #4280d7; }
+        #hardware-bar button.upload { background: #ff6680; color: white; border-color: #e2556d; }
+        #status { min-width: 150px; max-width: 360px; margin-left: auto; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        #settings-panel {
+            position: fixed; z-index: 5; top: 58px; right: 8px; width: 330px; padding: 14px;
+            background: white; color: #222; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 18px rgba(0,0,0,.2);
+            display: none;
+        }
+        #settings-panel.open { display: block; }
+        #settings-panel label { display: block; font-size: 12px; font-weight: 600; margin: 8px 0 3px; }
+        #settings-panel input { width: 100%; height: 32px; padding: 4px 7px; }
+        #editor-shell { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; background: #fff; }
+        #editor {
+            position: absolute; inset: 0 auto 0 0; width: calc(100% + 430px); height: 100%; border: 0;
+        }
+        #build-note {
+            position: absolute; right: 8px; bottom: 8px; z-index: 2; max-width: 290px; padding: 7px 9px;
+            border-radius: 6px; background: rgba(0,0,0,.72); color: white; font-size: 11px; line-height: 1.35;
+        }
+        @media (max-width: 900px) {
+            #status { display: none; }
+            #hardware-bar strong { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="hardware-bar">
+        <strong>Arduino Web Test</strong>
+        <select id="method" aria-label="Connection method">
+            <option value="usb">USB cable</option>
+            <option value="bluetooth">Bluetooth</option>
+        </select>
+        <button id="connect" class="primary">Connect</button>
+        <button id="disconnect">Disconnect</button>
+        <button id="upload" class="upload">Upload firmware…</button>
+        <button id="settings">Settings</button>
+        <span id="status">Not connected</span>
+    </div>
+
+    <div id="settings-panel">
+        <label for="usb-baud">USB baud rate</label>
+        <input id="usb-baud" type="number" value="115200">
+        <label for="boot-baud">AVR bootloader baud</label>
+        <input id="boot-baud" type="number" value="115200">
+        <label for="page-size">AVR page size</label>
+        <input id="page-size" type="number" value="128">
+        <label for="ble-service">BLE service UUID</label>
+        <input id="ble-service">
+        <label for="ble-write">BLE write / OTA characteristic</label>
+        <input id="ble-write">
+        <label for="ble-notify">BLE notify characteristic</label>
+        <input id="ble-notify">
+        <label for="ble-packet">BLE packet size</label>
+        <input id="ble-packet" type="number" value="20">
+    </div>
+
+    <div id="editor-shell">
+        <iframe id="editor" title="TurboWarp Arduino editor"></iframe>
+        <div id="build-note">This launcher uses the official TurboWarp editor immediately. Running the /dev build replaces it with the pinned local TurboWarp build where sprite/stage UI and sprite-only categories are removed at source.</div>
+    </div>
+
+    <script src="./host.js"></script>
+</body>
+</html>
