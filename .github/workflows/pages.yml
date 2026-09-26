@@ -26,11 +26,11 @@ jobs:
         run: npm ci
       - name: Build root app
         run: npm run build
-      - name: Build customized TurboWarp editor for /dev
+      - name: Build customized Arduino editor for /dev
         run: |
           npm install --prefix dev
           npm --prefix dev run setup
-          CI=true NODE_ENV=production ROOT=/dev/ ROUTING_STYLE=wildcard npm --prefix dev/turbowarp-gui run build
+          CI=true NODE_ENV=production ROOT=./ ROUTING_STYLE=wildcard npm --prefix dev/turbowarp-gui run build
           rm -rf dist/dev
           mkdir -p dist/dev
           cp -a dev/turbowarp-gui/build/. dist/dev/
