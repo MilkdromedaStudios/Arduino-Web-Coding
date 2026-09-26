@@ -8,7 +8,7 @@
     "patch": "node scripts/patch-turbowarp.mjs",
     "setup": "npm run sync && npm run patch && npm --prefix turbowarp-gui ci",
     "start": "npm run patch && npm --prefix turbowarp-gui start",
-    "build": "npm run setup && cross-env NODE_ENV=production ROOT=/dev/ ROUTING_STYLE=wildcard npm --prefix turbowarp-gui run build && node scripts/publish-build.mjs"
+    "build": "npm run setup && cross-env NODE_ENV=production ROOT=./ ROUTING_STYLE=wildcard npm --prefix turbowarp-gui run build && node scripts/publish-build.mjs"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"
