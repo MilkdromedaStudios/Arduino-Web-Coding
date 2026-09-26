@@ -30,6 +30,7 @@ jobs:
         run: |
           npm install --prefix dev
           npm --prefix dev run setup
+          cp dev/overrides/python-sync.js dev/turbowarp-gui/src/components/python-editor/python-sync.js
           CI=true NODE_ENV=production ROOT=./ ROUTING_STYLE=wildcard npm --prefix dev/turbowarp-gui run build
           rm -rf dist/dev
           mkdir -p dist/dev
