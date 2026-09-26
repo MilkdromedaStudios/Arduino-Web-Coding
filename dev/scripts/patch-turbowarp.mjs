@@ -28,7 +28,7 @@ gui = replaceOnce(
 gui = replaceOnce(
     gui,
     "    } = omit(props, 'dispatch');\n    if (children) {",
-    "    } = omit(props, 'dispatch');\n\n    const arduinoExtensionURL = new URL(basePath + 'static/arduino/arduino-extension.js', window.location.href).href;\n    React.useEffect(() => {\n        const manager = vm.extensionManager;\n        const security = manager.securityManager;\n        const originalGetSandboxMode = security.getSandboxMode.bind(security);\n        security.getSandboxMode = url => url === arduinoExtensionURL ? 'unsandboxed' : originalGetSandboxMode(url);\n        manager.loadExtensionURL(arduinoExtensionURL).catch(error => {\n            // eslint-disable-next-line no-console\n            console.error('Unable to load Arduino extension', error);\n        });\n        return () => {\n            security.getSandboxMode = originalGetSandboxMode;\n        };\n    }, [vm, arduinoExtensionURL]);\n\n    if (children) {",
+    "    } = omit(props, 'dispatch');\n\n    const arduinoExtensionURL = new URL(basePath + 'arduino/arduino-extension.js', window.location.href).href;\n    React.useEffect(() => {\n        const manager = vm.extensionManager;\n        const security = manager.securityManager;\n        const originalGetSandboxMode = security.getSandboxMode.bind(security);\n        security.getSandboxMode = url => url === arduinoExtensionURL ? 'unsandboxed' : originalGetSandboxMode(url);\n        manager.loadExtensionURL(arduinoExtensionURL).catch(error => {\n            // eslint-disable-next-line no-console\n            console.error('Unable to load Arduino extension', error);\n        });\n        return () => {\n            security.getSandboxMode = originalGetSandboxMode;\n        };\n    }, [vm, arduinoExtensionURL]);\n\n    if (children) {",
     'automatic Arduino extension load'
 );
 
@@ -77,6 +77,43 @@ toolbox = replaceOnce(
 );
 writeFileSync(toolboxPath, toolbox);
 
+const brandPath = path.join(GUI_ROOT, 'src/lib/brand.js');
+let brand = readFileSync(brandPath, 'utf8');
+brand = replaceOnce(brand, "APP_NAME: 'TurboWarp'", "APP_NAME: 'Arduino Web Coding'", 'application name');
+writeFileSync(brandPath, brand);
+
+const webpackPath = path.join(GUI_ROOT, 'webpack.config.js');
+let webpack = readFileSync(webpackPath, 'utf8');
+webpack = replaceOnce(
+    webpack,
+    'title: `${APP_NAME} - Run Scratch projects faster`,\n                isEditor: true,',
+    'title: APP_NAME,\n                isEditor: true,',
+    'editor page title'
+);
+writeFileSync(webpackPath, webpack);
+
+const playgroundPath = path.join(GUI_ROOT, 'src/playground/index.ejs');
+let playground = readFileSync(playgroundPath, 'utf8');
+playground = replaceOnce(
+    playground,
+    '<meta name="description" content="<%= htmlWebpackPlugin.options.APP_NAME %> is a Scratch mod with a compiler to run projects faster, dark mode for your eyes, a bunch of addons to improve the editor, and more." />',
+    '<meta name="description" content="<%= htmlWebpackPlugin.options.APP_NAME %> is a browser-based block editor for programming Arduino hardware." />',
+    'page description'
+);
+playground = replaceOnce(
+    playground,
+    '<p>Consider using <a href="https://desktop.turbowarp.org/">TurboWarp Desktop</a> if you are afraid of remote JavaScript.</p>',
+    '<p>This Arduino editor requires JavaScript to run in your browser.</p>',
+    'noscript branding'
+);
+playground = replaceOnce(
+    playground,
+    '<div class="splash-error-title" hidden>Something went wrong. <a href="https://scratch.mit.edu/users/GarboMuffin/#comments" target="_blank" rel="noreferrer">Please report</a> with the information below.</div>',
+    '<div class="splash-error-title" hidden>Arduino Web Coding could not start. Check the details below.</div>',
+    'splash error branding'
+);
+writeFileSync(playgroundPath, playground);
+
 const toolbarDir = path.join(GUI_ROOT, 'src/components/arduino-toolbar');
 mkdirSync(toolbarDir, {recursive: true});
 copyFileSync(path.join(DEV_ROOT, 'overrides/arduino-toolbar.jsx'), path.join(toolbarDir, 'arduino-toolbar.jsx'));
@@ -86,4 +123,4 @@ const extensionDir = path.join(GUI_ROOT, 'static/arduino');
 mkdirSync(extensionDir, {recursive: true});
 copyFileSync(path.join(DEV_ROOT, 'arduino-extension.js'), path.join(extensionDir, 'arduino-extension.js'));
 
-console.log('Applied Arduino web-test patches to TurboWarp.');
+console.log('Applied Arduino Web Coding patches to TurboWarp engine.');
