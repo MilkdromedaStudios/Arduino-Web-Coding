@@ -24,19 +24,47 @@ jobs:
           cache: npm
       - name: Install root dependencies
         run: npm ci
-      - name: Build root app
-        run: npm run build
-      - name: Build customized Arduino editor for /dev
+      - name: Build previous site for /v1
+        run: |
+          npm run build
+          rm -rf /tmp/arduino-web-v1
+          mkdir -p /tmp/arduino-web-v1
+          cp -a dist/. /tmp/arduino-web-v1/
+      - name: Build current Arduino editor for root
         run: |
           npm install --prefix dev
           npm --prefix dev run setup
-          cp dev/overrides/python-sync.js dev/turbowarp-gui/src/components/python-editor/python-sync.js
           CI=true NODE_ENV=production ROOT=./ ROUTING_STYLE=wildcard npm --prefix dev/turbowarp-gui run build
-          rm -rf dist/dev
+
+          rm -rf dist
+          mkdir -p dist
+          cp -a dev/turbowarp-gui/build/. dist/
+          cp dist/editor.html dist/index.html
+          rm -f dist/addons.html
+
+          mkdir -p dist/v1
+          cp -a /tmp/arduino-web-v1/. dist/v1/
+
+          # Preserve a configured custom-domain file if the previous site emitted one.
+          if [ -f /tmp/arduino-web-v1/CNAME ]; then
+            cp /tmp/arduino-web-v1/CNAME dist/CNAME
+          fi
+
+          # Keep old /dev links working, but the current editor now lives at root.
           mkdir -p dist/dev
-          cp -a dev/turbowarp-gui/build/. dist/dev/
-          cp dist/dev/editor.html dist/dev/index.html
-          rm -f dist/dev/addons.html
+          cat > dist/dev/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0; url=../">
+            <meta name="robots" content="noindex">
+            <title>Arduino Web Coding</title>
+            <script>location.replace('../');</script>
+          </head>
+          <body><a href="../">Open Arduino Web Coding</a></body>
+          </html>
+          EOF
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
