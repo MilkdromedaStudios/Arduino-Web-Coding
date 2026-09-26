@@ -35,6 +35,7 @@ jobs:
           mkdir -p dist/dev
           cp -a dev/turbowarp-gui/build/. dist/dev/
           cp dist/dev/editor.html dist/dev/index.html
+          rm -f dist/dev/addons.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
