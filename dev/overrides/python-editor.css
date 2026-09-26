@@ -1,0 +1,103 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    background: #f7f8fa;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid #d9dde5;
+    background: white;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.subtitle {
+    margin: 0.2rem 0 0;
+    font-size: 0.8rem;
+    color: #596273;
+}
+
+.actions {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.button,
+.primaryButton {
+    border: 1px solid #b9c0cc;
+    border-radius: 0.45rem;
+    padding: 0.45rem 0.7rem;
+    background: white;
+    font: inherit;
+    cursor: pointer;
+}
+
+.primaryButton {
+    border-color: #008f95;
+    background: #00979d;
+    color: white;
+}
+
+.editorShell {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    background: #171a21;
+}
+
+.gutter {
+    flex: 0 0 auto;
+    min-width: 3.2rem;
+    padding: 0.9rem 0.7rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: right;
+    user-select: none;
+    color: #7f8998;
+    background: #11141a;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.editor {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    padding: 0.9rem 1rem;
+    resize: none;
+    border: 0;
+    outline: none;
+    background: #171a21;
+    color: #edf2f7;
+    caret-color: white;
+    tab-size: 4;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.55;
+    white-space: pre;
+    overflow: auto;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.45rem 0.8rem;
+    border-top: 1px solid #d9dde5;
+    background: white;
+    color: #596273;
+    font-size: 0.72rem;
+}
