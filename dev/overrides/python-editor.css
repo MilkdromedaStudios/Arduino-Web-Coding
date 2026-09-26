@@ -3,7 +3,8 @@
     flex-direction: column;
     height: 100%;
     min-height: 0;
-    background: #f7f8fa;
+    background: #0f1117;
+    color: #eef2f7;
 }
 
 .header {
@@ -11,50 +12,78 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.85rem 1rem;
-    border-bottom: 1px solid #d9dde5;
-    background: white;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #2a2f3a;
+    background: #151922;
 }
 
 .title {
     margin: 0;
+    color: #ffffff;
     font-size: 1.05rem;
 }
 
 .subtitle {
     margin: 0.2rem 0 0;
     font-size: 0.8rem;
-    color: #596273;
+    color: #9da8b8;
 }
 
 .actions {
     display: flex;
+    align-items: center;
     gap: 0.45rem;
     flex-wrap: wrap;
 }
 
+.syncStatus {
+    max-width: 21rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #a7d9dc;
+    font-size: 0.75rem;
+}
+
 .button,
 .primaryButton {
-    border: 1px solid #b9c0cc;
+    border: 1px solid #394150;
     border-radius: 0.45rem;
     padding: 0.45rem 0.7rem;
-    background: white;
+    background: #202631;
+    color: #eef2f7;
     font: inherit;
     cursor: pointer;
 }
 
+.button:hover {
+    background: #2a3240;
+}
+
 .primaryButton {
-    border-color: #008f95;
-    background: #00979d;
+    border-color: #00a7ae;
+    background: #008f95;
     color: white;
+}
+
+.primaryButton:hover {
+    background: #00a0a7;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    background: #0f1117;
 }
 
 .editorShell {
     display: flex;
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 0;
     min-height: 0;
     overflow: hidden;
-    background: #171a21;
+    background: #0f1117;
 }
 
 .gutter {
@@ -65,8 +94,9 @@
     overflow: hidden;
     text-align: right;
     user-select: none;
-    color: #7f8998;
-    background: #11141a;
+    color: #687487;
+    background: #0b0d12;
+    border-right: 1px solid #232936;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 14px;
     line-height: 1.55;
@@ -80,9 +110,9 @@
     resize: none;
     border: 0;
     outline: none;
-    background: #171a21;
-    color: #edf2f7;
-    caret-color: white;
+    background: #0f1117;
+    color: #f4f7fb;
+    caret-color: #67e8f0;
     tab-size: 4;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 14px;
@@ -91,13 +121,88 @@
     overflow: auto;
 }
 
-.footer {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.45rem 0.8rem;
-    border-top: 1px solid #d9dde5;
-    background: white;
-    color: #596273;
+.editor::placeholder {
+    color: #596579;
+}
+
+.docs {
+    flex: 0 0 330px;
+    min-width: 260px;
+    max-width: 38%;
+    border-left: 1px solid #2a2f3a;
+    background: #131720;
+    color: #dce3ed;
+}
+
+.docsScroll {
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 1rem;
+}
+
+.docs h3,
+.docs h4 {
+    color: white;
+}
+
+.docs h3 {
+    margin: 0 0 0.65rem;
+    font-size: 1rem;
+}
+
+.docs h4 {
+    margin: 1rem 0 0.4rem;
+    font-size: 0.82rem;
+}
+
+.docs p {
+    margin: 0.35rem 0;
+    color: #aab5c4;
+    font-size: 0.77rem;
+    line-height: 1.45;
+}
+
+.docs code,
+.docs pre {
+    display: block;
+    margin: 0.28rem 0;
+    padding: 0.42rem 0.5rem;
+    border: 1px solid #293142;
+    border-radius: 0.35rem;
+    overflow-x: auto;
+    background: #0b0e14;
+    color: #b8f3f6;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.72rem;
+    line-height: 1.45;
+    white-space: pre;
+}
+
+.docs p code {
+    display: inline;
+    margin: 0;
+    padding: 0.05rem 0.22rem;
+}
+
+.docsNote {
+    margin-top: 1rem;
+    padding: 0.65rem;
+    border: 1px solid #35515a;
+    border-radius: 0.4rem;
+    background: #14262b;
+    color: #bfeef0;
+    font-size: 0.73rem;
+    line-height: 1.45;
+}
+
+@media (max-width: 1050px) {
+    .docs {
+        flex-basis: 280px;
+        max-width: 42%;
+    }
+
+    .syncStatus {
+        display: none;
+    }
 }
