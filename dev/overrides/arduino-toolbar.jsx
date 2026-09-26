@@ -45,6 +45,16 @@ const ArduinoToolbar = ({vm}) => {
         }
     };
 
+    const startBlocks = () => {
+        vm.runtime.startHats('arduinoDynamic_whenArduinoStarts');
+        setState(current => ({...current, status: 'Arduino block program started'}));
+    };
+
+    const stopBlocks = () => {
+        vm.stopAll();
+        setState(current => ({...current, status: 'Block program stopped'}));
+    };
+
     const settings = getAPI() ? getAPI().getSettings() : {};
 
     return (
@@ -78,6 +88,11 @@ const ArduinoToolbar = ({vm}) => {
                 >
                     Disconnect
                 </button>
+            </div>
+
+            <div className={styles.row}>
+                <button className={styles.primaryButton} onClick={startBlocks}>Run blocks</button>
+                <button className={styles.button} onClick={stopBlocks}>Stop</button>
             </div>
 
             <button
@@ -171,7 +186,7 @@ const ArduinoToolbar = ({vm}) => {
             </button>
 
             <p className={styles.note}>
-                USB uses Web Serial. Bluetooth uses configurable GATT UUIDs so custom boards and OTA receivers can be used.
+                The “when Arduino starts” hat runs automatically after a connection and can also be restarted with Run blocks.
             </p>
         </aside>
     );
